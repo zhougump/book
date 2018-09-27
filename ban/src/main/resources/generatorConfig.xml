@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>   
+    <!DOCTYPE generatorConfiguration    
+      PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"    
+      "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+      
+      
+<generatorConfiguration>
+<!-- 指定数据连接驱动jar地址 -->
+	<classPathEntry location="e:/mysql-connector-java-5.1.22-bin.jar" />
+<!-- 数据库   context语境  target是目标-->	
+	<context id="Mysql" targetRuntime="MyBatis3">
+	<!-- 注释生成器   comment就是注解的意思，generator是生成的意思  property是属性   suppress是压制的意思-->
+		<commentGenerator>
+			<property name="suppressDate" value="true" />  <!-- 是否生成注释代时间戳 -->
+			<property name="suppressAllComments" value="true" />  <!-- 是否取消注释  -->
+		</commentGenerator>
+         <!-- 数据库连接    Connection连接的意思   -->
+		<jdbcConnection driverClass="com.mysql.jdbc.Driver"
+			            connectionURL="jdbc:mysql://localhost:3306/book" 
+			            userId="root"
+			            password="ambition">
+		</jdbcConnection>
+		
+		<!-- 实体类 -->
+		<javaModelGenerator targetPackage="com.bdqn.ban.entity"
+			targetProject="ban/src/main/java">
+		<!-- 是否让*******作为包的后缀   enable提供是意思  sub是附属的意思 -->	
+			<property name="enableSubPackages" value="true" />
+		<!-- 是否针对string类型的字段在set的时候进行trim调用trim就是删除字符串两边的空格 -->	
+			<property name="trimStrings" value="true" />
+		</javaModelGenerator>
+
+        <!-- mybatis映射文件 -->
+		<sqlMapGenerator targetPackage="com.bdqn.ban.dao.mapper"
+			targetProject="ban/src/main/java">
+			<property name="enableSubPackages" value="true" />
+		</sqlMapGenerator>
+
+        <!--生成Dao   Client是客户机程序-->
+		<javaClientGenerator targetPackage="com.bdqn.ban.dao" 
+		    targetProject="ban/src/main/java" type="XMLMAPPER">
+			<property name="enableSubPackages" value="true" />
+		</javaClientGenerator>
+
+        <!-- 设置表和实体类对应关系    domain是域的意思-->
+		<table tableName="user" domainObjectName="User"
+			enableCountByExample="false" enableUpdateByExample="false"
+			enableDeleteByExample="false" enableSelectByExample="false"
+			selectByExampleQueryId="false"></table>
+	</context>
+</generatorConfiguration>    
